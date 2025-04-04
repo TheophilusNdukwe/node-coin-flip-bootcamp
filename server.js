@@ -6,9 +6,7 @@ const url = require('url')//module for url parsing and resolution
 const querystring = require('querystring')//module provides utilities for parsing and formatting URL query strings.
 const figlet = require('figlet')
 
-const choices = ['heads', 'tails']
-const randomChoice = Math.floor(Math.random() * 2)
-const randomResult = choices[randomChoice]
+
 
 //setting up the page
 const server = http.createServer(function (req, res) {
@@ -25,9 +23,15 @@ const server = http.createServer(function (req, res) {
     });
   }
   else if (page == '/api') {
+      const choices = ['heads', 'tails']
+      const randomChoice = Math.floor(Math.random() * 2)
+      const randomResult = choices[randomChoice]
     if (params.coingame === 'heads') {//if user chose heads
+
       if (randomResult === 'heads') {//compare user result to Math.random result, if they are the same return User has won
+
         res.writeHead(200, { 'Content-Type': 'application/json' })
+
         const objToJson = {
           gameMessage: "You chose Heads and the coin landed on Heads",
           decision: "YOU WIN"
@@ -37,7 +41,9 @@ const server = http.createServer(function (req, res) {
         res.end(JSON.stringify(objToJson))
       }
       else if (randomResult === 'tails') {
+
         res.writeHead(200, { 'Content-Type': 'application/json' })
+
         const objToJson = {
           gameMessage: "You chose Heads and the coin landed on Tails ",
           decision: "YOU LOSE"
@@ -51,7 +57,9 @@ const server = http.createServer(function (req, res) {
     if (params.coingame === 'tails') {
     
       if (randomResult === 'tails') {
+
         res.writeHead(200, { 'Content-Type': 'application/json' })
+
         const objToJson = {
           gameMessage: "You chose Tails and the coin landed on Tails",
           decision: "YOU WIN"
@@ -61,7 +69,9 @@ const server = http.createServer(function (req, res) {
         res.end(JSON.stringify(objToJson))
       }
       else if (randomResult === 'heads') {
+
         res.writeHead(200, { 'Content-Type': 'application/json' })
+
         const objToJson = {
           gameMessage: "You chose Tails and the coin landed on Heads ",
           decision: "YOU LOSE"
@@ -76,6 +86,7 @@ const server = http.createServer(function (req, res) {
   }
   
   else if (page == '/css/style.css') {
+    
       fs.readFile('css/style.css', function (err, data) {
         res.write(data);
         res.end();
